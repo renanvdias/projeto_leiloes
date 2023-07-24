@@ -214,9 +214,9 @@ public class listagemVIEW extends javax.swing.JFrame {
             
             for (ProdutosDTO c : listagemProdutos) { //em cada volta do laço for, o mesmo adiciona uma dado(empresa) dentro do objeto c
                     Object[] obj = new Object[] { 
-                        c.getId(),            //id
-                        c.getNome(),   //nomeempresa
-                        c.getValor(),   //areadeatuacao 
+                        c.getId(),           
+                        c.getNome(),   
+                        c.getValor(),    
                         c.getStatus(),
                     };
                     model.addRow(obj);
