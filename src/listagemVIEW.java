@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -13,9 +14,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class listagemVIEW extends javax.swing.JFrame {
 
-    /**
-     * Creates new form listagemVIEW
-     */
+     private void preencherTabela() {
+            ProdutosDAO produtosDAO = new ProdutosDAO();
+            List<ProdutosDTO> listaProdutos = produtosDAO.listarProdutos();
+    }
+
     public listagemVIEW() {
         initComponents();
         listarProdutos();
@@ -203,21 +206,21 @@ public class listagemVIEW extends javax.swing.JFrame {
 
     private void listarProdutos(){
         try {
-            ProdutosDAO produtosdao = new ProdutosDAO();
-            
             DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel();
             model.setNumRows(0);
             
-            ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutos();
+            ProdutosDAO produtosDAO = new ProdutosDAO();
+            ArrayList<ProdutosDTO> listagemProdutos = produtosDAO.listarProdutos();
             
-            for(int i = 0; i < listagem.size(); i++){
-                model.addRow(new Object[]{
-                    listagem.get(i).getId(),
-                    listagem.get(i).getNome(),
-                    listagem.get(i).getValor(),
-                    listagem.get(i).getStatus()
-                });
-            }
+            for (ProdutosDTO c : listagemProdutos) { //em cada volta do laço for, o mesmo adiciona uma dado(empresa) dentro do objeto c
+                    Object[] obj = new Object[] { 
+                        c.getId(),            //id
+                        c.getNome(),   //nomeempresa
+                        c.getValor(),   //areadeatuacao 
+                        c.getStatus(),
+                    };
+                    model.addRow(obj);
+                }    
         } catch (Exception e) {
         }
     
