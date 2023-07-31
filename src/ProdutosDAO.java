@@ -70,6 +70,20 @@ public class ProdutosDAO {
       }
   }
               
+    public int venderProduto(ProdutosDTO func) {
+    int status;
+    try {
+        conn = new conectaDAO().connectDB();
+        st = conn.prepareStatement("UPDATE produtos SET status = 'Vendido' WHERE id = ?");
+        st.setInt(1, func.getId());
+        status = st.executeUpdate();
+        return status;
+    } catch (SQLException ex) {
+        System.out.println("Erro ao conectar: " + ex.getMessage());
+        status = 0;
+        return status;
+    }
+}
     
         
 }
